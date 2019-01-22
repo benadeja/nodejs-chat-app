@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<!--To tell the browser we are using html-5-->
 
 <html>
 
 <head>
   <meta charset="utf-8">
-  <!-- Without a viewport meta tag, mobile devices render pages at typical desktop screen widths, and then scale the pages to fit the mobile screens. Setting the viewport enables you to control the width and scaling of the viewport.-->
+  <title>Chat | ChatApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -18,19 +17,15 @@
   </div>
 
   <div class="chat__main">
-
     <ol id="messages" class="chat__messages"></ol>
 
     <div class="chat__footer">
       <form id="message-form">
-        <input name="message" type="text" placehold="Message" autocomplete="off" autofocus />
+        <input name="message" type="text" placeholder="Message" autofocus autocomplete="off"/>
         <button>Send</button>
       </form>
-
       <button id="send-location">Send location</button>
-
     </div>
-
   </div>
 
   <script id="message-template" type="text/template">
@@ -52,7 +47,9 @@
         <span>{{createdAt}}</span>
       </div>
       <div class="message__body">
-        <a href="{{url}}" tarhet="_blank">My current location</a>
+        <p>
+          <a href="{{url}}" target="_blank">My current location</a>
+        </p>
       </div>
     </li>
   </script>
@@ -61,8 +58,8 @@
   <script src="/js/libs/jquery-3.3.1.min.js"></script>
   <script src="/js/libs/moment.js"></script>
   <script src="/js/libs/mustache.js"></script>
+  <script src="/js/libs/deparam.js"></script>
   <script src="/js/chat.js"></script>
-  <script src="/js/deparam.js"></script>
 </body>
 
 </html>
