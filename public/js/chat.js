@@ -11,17 +11,37 @@ function scrollToBottom() {
   var newMessageHeight = newMessage.innerHeight();
   var lastMessageHeight = newMessage.prev().innerHeight();
 
-  if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight){
+  if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
     messages.scrollTop(scrollHeight); // set the scrollTop to the total height of the container
   };
 };
 
 socket.on('connect', function () {
-  console.log('Connected to server');
+  var params = jQuery.deparam(window.location.search);
+
+  socket.emit('join', params, function (err) {
+    if (err) {
+      alert(err);
+      window.location.href = '/'
+    } else {
+      console.log('No error');
+    }
+  });
 });
 
 socket.on('disconnect', function () {
   console.log('Disconnected from server');
+});
+
+socket.on('updateUserList', function(users) {
+  console.log('Users list', users);
+  var ol = jQuery('<ol></ol>')
+
+  users.forEach(function (user) {
+    ol.append(jQuery('<li></li>').text(user));
+  });
+
+  jQuery('#users').html(ol);
 });
 
 socket.on('newMessage', function (message) {
@@ -71,13 +91,13 @@ locationButton.on('click', function () {
   locationButton.attr('disabled', 'disabled').text('Sending location...');
 
   navigator.geolocation.getCurrentPosition(function (position) {
-    locationButton.removeAttr('disabled');
+    locationButton.removeAttr('disabled').text('Send location');
     socket.emit('createLocationMessage', {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     });
   }, function () {
-    locationButton.removeAttr('disabled').text('Sending location...');
+    locationButton.removeAttr('disabled').text('Send location');
     alert('Unable to fetch location');
   })
 });
