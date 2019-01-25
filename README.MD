@@ -1,6 +1,6 @@
-# Nodejs Todo API
+# Nodejs Chat Room Application
 
-NodeJS and socket.io chat application to showcase interactions between users by making using of web sockets.
+NodeJS and socket.io chat application to simulate interactions between users and chat rooms by making using of web sockets technologies.
 
 This app is also hosted on Heroku at this URL : https://shielded-reef-89639.herokuapp.com/ 
 
